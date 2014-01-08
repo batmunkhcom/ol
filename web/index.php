@@ -2,7 +2,7 @@
 
 define('APPMODE', 'dev');
 
-require_once '../core/bootstrap.php';
+require_once '../library/bootstrap.php';
 require_once DIR_LIB.'_includes'.DS.'router.php';
 
 if(file_exists(\Config::get('load_file'))){
