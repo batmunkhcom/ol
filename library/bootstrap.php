@@ -25,7 +25,7 @@ define('DIR_UPLOAD', 'upload' . DS);
 require_once(DIR_CONFIG.'main.php');
 
 //load autoloader
-require DIR_LIB . 'library/vendor/autoload.php';
+require DIR_LIB . 'vendor/autoload.php';
 
 //require files in function folder.
 \File::getAndIncludePHPFiles(DIR_LIB.'functions'.DS);
