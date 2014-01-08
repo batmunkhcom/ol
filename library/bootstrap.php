@@ -14,13 +14,15 @@ define('DIR_ABS', __DIR__ . DS . '../');
 //Folder configuration
 define('DIR_LIB', DIR_ABS.'library' . DS);
 define('DIR_CONFIG', DIR_ABS.'config' . DS);
-define('DIR_CONFIG', DIR_MODULE.'modules' . DS);
+define('DIR_MODULE', DIR_ABS.'modules' . DS);
 define('DIR_TMP', DIR_ABS . 'tmp' . DS);
 define('DIR_CACHE', DIR_ABS . 'cache' . DS);
 define('DIR_LOG', DIR_ABS . 'log' . DS);
 define('DIR_DOCS', DIR_ABS . 'docs' . DS);
 define('DIR_UPLOAD', 'upload' . DS);
 
+//load config file
+require_once(DIR_CONFIG.'main.php');
 
 //load autoloader
 require DIR_LIB . 'library/vendor/autoload.php';
