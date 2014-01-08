@@ -12,4 +12,3 @@ if (file_exists(\Config::get('load_file'))) {
 }
 require_once DIR_LIB . '_includes/footer.php';
 
-echo get('id');
