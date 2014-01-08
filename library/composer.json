@@ -1,0 +1,18 @@
+{
+    "require": {
+        "bzikarsky/gelf-php":         "*",
+        "klein/klein":              "*"
+    },
+    "autoload": {
+        "classmap": [
+            "functions/"
+        ],
+        "exclude": [
+            "test"
+        ],
+        "psr-0": {
+            "": ["User/","Friend/","Ol/","Core/"]
+        }
+    },
+    "minimum-stability": "stable"
+}
