@@ -1,6 +1,5 @@
 <?php
 
-
 //user route
 $router->with('/user', function () use ($router) {
 
@@ -21,7 +20,3 @@ $router->with('/user', function () use ($router) {
         \Config::set('load_file',DIR_MODULE.'user'.DS.'profile.php');
     });
 });
-
-
-// Run it!
-$router->dispatch();

@@ -25,6 +25,9 @@ define('DIR_UPLOAD', 'upload' . DS);
 //load autoloader
 require DIR_LIB . 'library/vendor/autoload.php';
 
+//require files in function folder.
+\File::getAndIncludePHPFiles(DIR_LIB.'functions'.DS);
+
 $config = new \Config(array());
 //router achaallah
 $router = new \Klein\Klein();

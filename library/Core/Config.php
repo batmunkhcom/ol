@@ -20,8 +20,7 @@
  * @property array $data[routes] ali module/action haash zaagdsan route iin tohirgoo
  * @property array $data[GET] $_GET huvisagchuud
  * @property array $data[POST] $_POST huvisagchuud
- * @property array $data[component_all] buh component uud
- * @property array $data[component_enabled] buh component uud
+ * @property array $data[load_file] include hiih file
  */
 class Config extends Core {
 
