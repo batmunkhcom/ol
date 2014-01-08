@@ -13,7 +13,7 @@ $router->respond('GET', '/', function ($request, $response) {
     return 'Backend home';
 });
 
-$functions_php = \File::getFiles(DIR_CONFIG . '_includes' . DS, 'php');
+$functions_php = \File::getFiles(DIR_CONFIG . 'routers' . DS, 'php');
 foreach ($functions_php as $k => $v) {
     require_once($v);
 }
