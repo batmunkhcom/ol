@@ -16,6 +16,7 @@ define('DIR_LIB', DIR_ABS . 'library' . DS);
 define('DIR_CORE', DIR_LIB);
 define('DIR_CONFIG', DIR_ABS . 'config' . DS);
 define('DIR_MODULE', DIR_ABS . 'modules' . DS);
+define('DIR_LANG', DIR_ABS . 'lang' . DS);
 define('DIR_TMP', DIR_ABS . 'tmp' . DS);
 define('DIR_CACHE', DIR_ABS . 'cache' . DS);
 define('DIR_LOG', DIR_ABS . 'log' . DS);
@@ -24,6 +25,9 @@ define('DIR_UPLOAD', 'upload' . DS);
 
 //load config file
 require_once(DIR_CONFIG . 'main.php');
+
+//load config file
+require_once(DIR_LANG . 'mn/index.php');
 
 //load autoloader
 require DIR_LIB . 'vendor/autoload.php';
