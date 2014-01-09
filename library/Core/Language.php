@@ -23,10 +23,10 @@ class Language {
     public $langFiles = array();
 
     public function __construct($ln = 'mn') {
-        if (DIR_CORE . 'lang' . DS . $ln . DS . 'index.php') {
-            $this->langFilesDir = DIR_CORE . 'lang' . DS . $ln . DS;
+        if (DIR_ABS . 'lang' . DS . $ln . DS . 'index.php') {
+            $this->langFilesDir = DIR_ABS . 'lang' . DS . $ln . DS;
         } else {
-            $this->langFilesDir = DIR_CORE . 'lang' . DS . strtolower(DEFAULT_LANG) . DS;
+            $this->langFilesDir = DIR_ABS . 'lang' . DS . strtolower(DEFAULT_LANG) . DS;
         }
         $this->langFiles = File::getFiles($this->langFilesDir, 'php');
 

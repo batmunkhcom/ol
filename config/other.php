@@ -8,5 +8,4 @@
  * file that was distributed with this source code.
  */
 
-require_once("database.php");
-require_once("other.php");
+define('DEFAULT_LANG','mn');

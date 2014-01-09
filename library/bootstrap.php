@@ -26,9 +26,6 @@ define('DIR_UPLOAD', 'upload' . DS);
 //load config file
 require_once(DIR_CONFIG . 'main.php');
 
-//load config file
-require_once(DIR_LANG . 'mn/index.php');
-
 //load autoloader
 require DIR_LIB . 'vendor/autoload.php';
 
@@ -38,6 +35,11 @@ foreach ($functions_php as $k => $v) {
     require_once($v);
 }
 
+//load config
 $config = new \Config(array());
+
+//load language
+$lang = new \Language(DEFAULT_LANG);
+
 //router achaallah
 $router = new \Klein\Klein();
