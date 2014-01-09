@@ -1,7 +1,8 @@
 {
     "require": {
-        "bzikarsky/gelf-php":         "*",
-        "klein/klein":              "*"
+        "bzikarsky/gelf-php":         	"*",
+        "klein/klein":              	"*",
+	"predis/predis": 		"dev-master"
     },
     "autoload": {
         "classmap": [

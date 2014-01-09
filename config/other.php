@@ -9,3 +9,7 @@
  */
 
 define('DEFAULT_LANG','mn');
+define('ENABLE_LOG',1);
+define('LOG_SERVER','203.194.113.3');
+define('LOG_FACILITY','ns13-Oluulaa');
+define('TIME_ZONE','Asia/Ulaanbaatar');

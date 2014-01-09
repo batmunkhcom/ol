@@ -26,6 +26,7 @@ define('DIR_UPLOAD', 'upload' . DS);
 //load config file
 require_once(DIR_CONFIG . 'main.php');
 
+date_default_timezone_set(TIME_ZONE);
 //load autoloader
 require DIR_LIB . 'vendor/autoload.php';
 
@@ -34,6 +35,16 @@ $functions_php = \File::getFiles(DIR_LIB . 'functions' . DS, 'php');
 foreach ($functions_php as $k => $v) {
     require_once($v);
 }
+session_start();
+//load log
+//if (ENABLE_LOG == 1) {
+    //error iig uuruu barij avah
+    $logger = new Gelf\Logger(new \Gelf\Publisher(new \Gelf\Transport\UdpTransport(LOG_SERVER)), LOG_FACILITY);
+    //$logger iig zarlasnii dara tohiruulna
+    set_exception_handler("my_exception_handler");
+    set_error_handler('my_error_handler');
+    register_shutdown_function('my_error_shutdown');
+//}
 
 //load config
 $config = new \Config(array());
