@@ -10,7 +10,7 @@
 
 $router->respond('GET', '/', function ($request, $response) {
 
-    return 'Backend home';
+    return 'Backend home<br />';
 });
 
 $functions_php = \File::getFiles(DIR_CONFIG . 'routers' . DS, 'php');
