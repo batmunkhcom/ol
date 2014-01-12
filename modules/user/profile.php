@@ -9,4 +9,15 @@ $a = array('b' => array(
         )
         ));
 echo json_encode($a);
-?>
+
+print_r($_POST);
+
+$r->set(session_id(), serialize($_SESSION));
+$a = unserialize($r->get(session_id()));
+
+
+$_SESSION['a'];
+
+function session_get($key) {
+    global $r;
+}

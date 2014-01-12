@@ -61,7 +61,7 @@ function set_post_parameter($param, $value) {
  */
 function post($key) {
 
-    $post = \M\Config::get('POST');
+    $post = \Config::get('POST');
     if (isset($post[$key])) {
         return $post[$key];
     } else {

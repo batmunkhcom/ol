@@ -8,12 +8,23 @@
  * file that was distributed with this source code.
  */
 
+$router->respond(function () {
+    //buh respond ashiglagdana
+
+    if (!post_exists('token') && post('token') != 'adsfadsfadsaf') {
+
+    } else {
+        echo '<h2>Forbidden</h2> request not allowed';
+        die();
+    }
+});
 $router->respond('GET', '/', function ($request, $response) {
 
     return 'Backend home<br />';
 });
 
 $functions_php = \File::getFiles(DIR_CONFIG . 'routers' . DS, 'php');
+
 foreach ($functions_php as $k => $v) {
     require_once($v);
 }

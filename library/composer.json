@@ -1,8 +1,7 @@
 {
     "require": {
-        "bzikarsky/gelf-php":         	"*",
-        "klein/klein":              	"*",
-	"predis/predis": 		"dev-master"
+        "bzikarsky/gelf-php": "*",
+        "klein/klein": "*"
     },
     "autoload": {
         "classmap": [
@@ -12,7 +11,7 @@
             "test"
         ],
         "psr-0": {
-            "": ["User/","Friend/","Ol/","Core/"]
+            "": ["User/", "Friend/", "Ol/", "Core/", "DB/"]
         }
     },
     "minimum-stability": "stable"
