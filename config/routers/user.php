@@ -13,12 +13,12 @@ $router->with('/user', function () use ($router) {
 
     //settings home
     $router->respond('GET', '/?', function ($request, $response) {
-        \Config::set('load_file', '');
+        \Config::set('load_file', DIR_MODULE . 'user' . DS . 'home.php');
     });
 
     //settings save
-    $router->respond('POST', '/save', function ($request, $response, $service) {
-
+    $router->respond('GET', '.[xml|csv|json:format]/[*]', function ($request, $response, $service) {
+        echo $request->format;
     });
 
     //comment update
