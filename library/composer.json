@@ -1,7 +1,8 @@
 {
     "require": {
         "bzikarsky/gelf-php": "*",
-        "klein/klein": "*"
+        "klein/klein": "*",
+        "predis/predis": "dev-master"
     },
     "autoload": {
         "classmap": [
@@ -14,5 +15,11 @@
             "": ["User/", "Friend/", "Ol/", "Core/", "DB/"]
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/nrk/predis"
+        }
+    ],
     "minimum-stability": "stable"
 }

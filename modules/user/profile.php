@@ -12,7 +12,9 @@ echo json_encode($a);
 
 print_r($_POST);
 
-$r->set(session_id(), serialize($_SESSION));
+$a[session_id] = $_SESSION;
+
+$r->set('a', serialize($a));
 $a = unserialize($r->get(session_id()));
 
 
@@ -20,4 +22,9 @@ $_SESSION['a'];
 
 function session_get($key) {
     global $r;
+    $a = unserialize($r->get('a'));
+
+    return $a[session_id()][$key];
 }
+
+echo session_get('a');
