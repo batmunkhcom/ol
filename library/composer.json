@@ -2,7 +2,8 @@
     "require": {
         "bzikarsky/gelf-php": "*",
         "klein/klein": "*",
-        "predis/predis": "dev-master"
+        "predis/predis": "dev-master",
+        "videlalvaro/php-amqplib": "*"
     },
     "autoload": {
         "classmap": [

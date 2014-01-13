@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\Log\\' => $vendorDir . '/psr/log',
     'Predis' => $vendorDir . '/predis/predis/lib',
+    'PhpAmqpLib' => $vendorDir . '/videlalvaro/php-amqplib',
     'Klein' => $vendorDir . '/klein/klein',
     'Gelf' => $vendorDir . '/bzikarsky/gelf-php/src',
     '' => array($baseDir . '/User', $baseDir . '/Friend', $baseDir . '/Ol', $baseDir . '/Core', $baseDir . '/DB'),
