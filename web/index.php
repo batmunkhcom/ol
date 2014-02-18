@@ -12,9 +12,9 @@ if (file_exists(\Config::get('load_file'))) {
 }
 require_once DIR_LIB . '_includes/footer.php';
 
-echo '<br />';
-$a = new \Profile\Test();
-$a->Test();
-
-echo '<br />';
-$u = new User();
+//echo '<br />';
+//$a = new \Profile\Test();
+//$a->Test();
+//
+//echo '<br />';
+//$u = new User();

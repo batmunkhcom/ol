@@ -21,6 +21,13 @@ $router->with('/user', function () use ($router) {
         echo $request->format;
     });
 
+    //user info
+    $router->respond('PUT', '/info', function ($request, $response) {
+
+        set_get_parameter('id', $request->id);
+
+        \Config::set('load_file', DIR_MODULE . 'user' . DS . 'info.php');
+    });
     //comment update
     $router->respond('GET', '/profile/[i:id]', function ($request, $response) {
 

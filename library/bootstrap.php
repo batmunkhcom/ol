@@ -38,16 +38,15 @@ foreach ($functions_php as $k => $v) {
 session_start();
 //load log
 //if (ENABLE_LOG == 1) {
-    //error iig uuruu barij avah
-    $logger = new Gelf\Logger(new \Gelf\Publisher(new \Gelf\Transport\UdpTransport(LOG_SERVER)), LOG_FACILITY);
-    //$logger iig zarlasnii dara tohiruulna
-    set_exception_handler("my_exception_handler");
-    set_error_handler('my_error_handler');
-    register_shutdown_function('my_error_shutdown');
+//error iig uuruu barij avah
+$logger = new Gelf\Logger(new \Gelf\Publisher(new \Gelf\Transport\UdpTransport(LOG_SERVER)), LOG_FACILITY);
+//$logger iig zarlasnii dara tohiruulna
+set_exception_handler("my_exception_handler");
+set_error_handler('my_error_handler');
+register_shutdown_function('my_error_shutdown');
 //}
-
 //load config
-$config = new \Config(array());
+$config = new \Config($config);
 
 //load language
 $lang = new \Language(DEFAULT_LANG);
