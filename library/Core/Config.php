@@ -33,9 +33,9 @@ class Config extends Core {
         foreach ($config as $k => $v) {
             define(strtoupper($k), $v);
         }
-        $this->data['POST'] = $_POST;
-        $this->data['FILES'] = $_FILES;
-        $this->data['GET'] = $_GET;
+        self::$data['POST'] = $_POST;
+        self::$data['FILES'] = $_FILES;
+        self::$data['GET'] = $_GET;
     }
 
     static function get($key = '', $value = null) {
