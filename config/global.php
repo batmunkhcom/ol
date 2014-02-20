@@ -1,3 +1,3 @@
 <?php
 
-$config["domain"] = 'ol.me';
+$config["domain"] = 'backend.oluulaa.net';
