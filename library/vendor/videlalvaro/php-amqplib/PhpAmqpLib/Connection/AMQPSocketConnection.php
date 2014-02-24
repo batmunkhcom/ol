@@ -18,5 +18,4 @@ class AMQPSocketConnection extends AbstractConnection
 
         parent::__construct($user, $password, $vhost, $insist, $login_method, $login_response, $locale, $io);
     }
-
 }

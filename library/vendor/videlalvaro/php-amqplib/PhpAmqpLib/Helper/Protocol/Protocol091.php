@@ -60,7 +60,7 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_shortstr($virtual_host);
 		$args->write_shortstr($capabilities);
-		$args->write_bits(array($insist));
+		$args->write_bit($insist);
 		return array(10, 40, $args);
 	}
 
@@ -98,7 +98,7 @@ class Protocol091
 
 	public function channelFlow($active) {
 		$args = new AMQPWriter();
-		$args->write_bits(array($active));
+		$args->write_bit($active);
 		return array(20, 20, $args);
 	}
 
@@ -125,7 +125,11 @@ class Protocol091
 	public function accessRequest($realm = '/data', $exclusive = false, $passive = true, $active = true, $write = true, $read = true) {
 		$args = new AMQPWriter();
 		$args->write_shortstr($realm);
-		$args->write_bits(array($exclusive, $passive, $active, $write, $read));
+		$args->write_bit($exclusive);
+		$args->write_bit($passive);
+		$args->write_bit($active);
+		$args->write_bit($write);
+		$args->write_bit($read);
 		return array(30, 10, $args);
 	}
 
@@ -141,7 +145,11 @@ class Protocol091
 		$args->write_short($ticket);
 		$args->write_shortstr($exchange);
 		$args->write_shortstr($type);
-		$args->write_bits(array($passive, $durable, $auto_delete, $internal, $nowait));
+		$args->write_bit($passive);
+		$args->write_bit($durable);
+		$args->write_bit($auto_delete);
+		$args->write_bit($internal);
+		$args->write_bit($nowait);
 		$args->write_table($arguments);
 		return array(40, 10, $args);
 	}
@@ -155,7 +163,8 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_short($ticket);
 		$args->write_shortstr($exchange);
-		$args->write_bits(array($if_unused, $nowait));
+		$args->write_bit($if_unused);
+		$args->write_bit($nowait);
 		return array(40, 20, $args);
 	}
 
@@ -171,7 +180,7 @@ class Protocol091
 		$args->write_shortstr($destination);
 		$args->write_shortstr($source);
 		$args->write_shortstr($routing_key);
-		$args->write_bits(array($nowait));
+		$args->write_bit($nowait);
 		$args->write_table($arguments);
 		return array(40, 30, $args);
 	}
@@ -188,7 +197,7 @@ class Protocol091
 		$args->write_shortstr($destination);
 		$args->write_shortstr($source);
 		$args->write_shortstr($routing_key);
-		$args->write_bits(array($nowait));
+		$args->write_bit($nowait);
 		$args->write_table($arguments);
 		return array(40, 40, $args);
 	}
@@ -203,7 +212,11 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_short($ticket);
 		$args->write_shortstr($queue);
-		$args->write_bits(array($passive, $durable, $exclusive, $auto_delete, $nowait));
+		$args->write_bit($passive);
+		$args->write_bit($durable);
+		$args->write_bit($exclusive);
+		$args->write_bit($auto_delete);
+		$args->write_bit($nowait);
 		$args->write_table($arguments);
 		return array(50, 10, $args);
 	}
@@ -223,7 +236,7 @@ class Protocol091
 		$args->write_shortstr($queue);
 		$args->write_shortstr($exchange);
 		$args->write_shortstr($routing_key);
-		$args->write_bits(array($nowait));
+		$args->write_bit($nowait);
 		$args->write_table($arguments);
 		return array(50, 20, $args);
 	}
@@ -237,7 +250,7 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_short($ticket);
 		$args->write_shortstr($queue);
-		$args->write_bits(array($nowait));
+		$args->write_bit($nowait);
 		return array(50, 30, $args);
 	}
 
@@ -251,7 +264,9 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_short($ticket);
 		$args->write_shortstr($queue);
-		$args->write_bits(array($if_unused, $if_empty, $nowait));
+		$args->write_bit($if_unused);
+		$args->write_bit($if_empty);
+		$args->write_bit($nowait);
 		return array(50, 40, $args);
 	}
 
@@ -281,7 +296,7 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_long($prefetch_size);
 		$args->write_short($prefetch_count);
-		$args->write_bits(array($global));
+		$args->write_bit($global);
 		return array(60, 10, $args);
 	}
 
@@ -296,7 +311,10 @@ class Protocol091
 		$args->write_short($ticket);
 		$args->write_shortstr($queue);
 		$args->write_shortstr($consumer_tag);
-		$args->write_bits(array($no_local, $no_ack, $exclusive, $nowait));
+		$args->write_bit($no_local);
+		$args->write_bit($no_ack);
+		$args->write_bit($exclusive);
+		$args->write_bit($nowait);
 		$args->write_table($arguments);
 		return array(60, 20, $args);
 	}
@@ -310,7 +328,7 @@ class Protocol091
 	public function basicCancel($consumer_tag, $nowait = false) {
 		$args = new AMQPWriter();
 		$args->write_shortstr($consumer_tag);
-		$args->write_bits(array($nowait));
+		$args->write_bit($nowait);
 		return array(60, 30, $args);
 	}
 
@@ -325,7 +343,8 @@ class Protocol091
 		$args->write_short($ticket);
 		$args->write_shortstr($exchange);
 		$args->write_shortstr($routing_key);
-		$args->write_bits(array($mandatory, $immediate));
+		$args->write_bit($mandatory);
+		$args->write_bit($immediate);
 		return array(60, 40, $args);
 	}
 
@@ -342,7 +361,7 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_shortstr($consumer_tag);
 		$args->write_longlong($delivery_tag);
-		$args->write_bits(array($redelivered));
+		$args->write_bit($redelivered);
 		$args->write_shortstr($exchange);
 		$args->write_shortstr($routing_key);
 		return array(60, 60, $args);
@@ -352,7 +371,7 @@ class Protocol091
 		$args = new AMQPWriter();
 		$args->write_short($ticket);
 		$args->write_shortstr($queue);
-		$args->write_bits(array($no_ack));
+		$args->write_bit($no_ack);
 		return array(60, 70, $args);
 	}
 
@@ -375,26 +394,26 @@ class Protocol091
 	public function basicAck($delivery_tag = 0, $multiple = false) {
 		$args = new AMQPWriter();
 		$args->write_longlong($delivery_tag);
-		$args->write_bits(array($multiple));
+		$args->write_bit($multiple);
 		return array(60, 80, $args);
 	}
 
 	public function basicReject($delivery_tag, $requeue = true) {
 		$args = new AMQPWriter();
 		$args->write_longlong($delivery_tag);
-		$args->write_bits(array($requeue));
+		$args->write_bit($requeue);
 		return array(60, 90, $args);
 	}
 
 	public function basicRecoverAsync($requeue = false) {
 		$args = new AMQPWriter();
-		$args->write_bits(array($requeue));
+		$args->write_bit($requeue);
 		return array(60, 100, $args);
 	}
 
 	public function basicRecover($requeue = false) {
 		$args = new AMQPWriter();
-		$args->write_bits(array($requeue));
+		$args->write_bit($requeue);
 		return array(60, 110, $args);
 	}
 
@@ -406,7 +425,8 @@ class Protocol091
 	public function basicNack($delivery_tag = 0, $multiple = false, $requeue = true) {
 		$args = new AMQPWriter();
 		$args->write_longlong($delivery_tag);
-		$args->write_bits(array($multiple, $requeue));
+		$args->write_bit($multiple);
+		$args->write_bit($requeue);
 		return array(60, 120, $args);
 	}
 
@@ -442,7 +462,7 @@ class Protocol091
 
 	public function confirmSelect($nowait = false) {
 		$args = new AMQPWriter();
-		$args->write_bits(array($nowait));
+		$args->write_bit($nowait);
 		return array(85, 10, $args);
 	}
 

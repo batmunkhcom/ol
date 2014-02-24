@@ -23,7 +23,7 @@ class WireTest extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < 100; $i++) {
             $this->octetWriteRead(rand(0, 255));
         }
-        $this->setExpectedException('PhpAmqpLib\Exception\AMQPInvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException');
         $this->octetWriteRead(-1);
         $this->octetWriteRead(256);
     }
@@ -39,7 +39,7 @@ class WireTest extends \PHPUnit_Framework_TestCase
             $this->shortWriteRead(rand(0, 65535));
         }
 
-        $this->setExpectedException('PhpAmqpLib\Exception\AMQPInvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException');
         $this->shortWriteRead(-1);
         $this->shortWriteRead(65536);
     }
@@ -67,7 +67,7 @@ class WireTest extends \PHPUnit_Framework_TestCase
         $this->shortstrWriteRead('a');
         $this->shortstrWriteRead('üıß∑œ´®†¥¨πøˆ¨¥†®');
 
-        $this->setExpectedException('PhpAmqpLib\Exception\AMQPInvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException');
         $this->shortstrWriteRead('abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
         abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
         abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz');

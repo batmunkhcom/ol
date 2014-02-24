@@ -52,3 +52,7 @@ $lang = new \Language(DEFAULT_LANG);
 
 //router achaallah
 $router = new \Klein\Klein();
+
+//load database
+$cb = new Couchbase("10.1.1.51:8091", "", "default");
+Config::set('cb',$cb);
