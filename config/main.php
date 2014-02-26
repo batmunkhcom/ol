@@ -9,4 +9,5 @@
  */
 
 require_once("database.php");
+require_once("global.php");
 require_once("other.php");
