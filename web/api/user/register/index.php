@@ -8,12 +8,6 @@
 require '../../../../global/db.php';
 require '../../../../common/_.php';
 
-?>
-<form method="post">
-    <input name="email" >
-    <input type="submit">
-</form>
-<?php
 
 
 $post_data =  post();
@@ -23,38 +17,53 @@ if(count($post_data)>0){
     $gender = $post_data['gender'];
     $email = $post_data['email'];
     $phone = $post_data['phone'];
+    $password = $post_data['$password'];
+    $fb_id = intval($post_data['facebook_id']);
     
+    $check_email = $cb->get('useremail::'.$email);
+    $check_phone = $cb->get('userphone::'.$phone);
+    $check_fb = $cb->get('userpfbid::'.$fb_id);
+    
+    
+    if($check_email || $check_phone || $check_fb){
+        echo "Error burtguulsen mail hayag";
+        return false;
+    }
     
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "not valid email";
         return false;
         exit();
     }
     
-    $password = $post_data['$password'];
-    $fb_id = intval($post_data['facebook_id']);
+    
 
     $salt = rand(1111,9999); 
     $password = generatePassword($password,$salt);
     $token = md5($email.rand(1111, 9999));
 
-    if(isset($school)&& count($school)>0){
-        $school['country'] = $school['country'];
-        $school['city'] = $school['city'];
-        $school['school'] = $school['school'];
-        $school['year_graduated'] = $school['year_graduated'];
-        $school['class'] = $school['class'];
-    }
-
-    if(isset($school)&& count($school)>0){
-        $college['country'] = $college['country'];
-        $college['city'] = $college['city'];
-        $college['school'] = $college['school'];
-        $college['year_graduated'] = $college['year_graduated'];
-        $college['department'] = $college['department'];
-        $college['class'] = $college['class'];
-    }
+    
     
     $userid = $cb->increment("user::count");
+    
+    if(isset($school)&& count($school)>0){
+        $school['userid'] = $userid;
+        $school['schools'][]['country'] = $school['country'];
+        $school['schools'][]['city'] = $school['city'];
+        $school['schools'][]['school'] = $school['school'];
+        $school['schools'][]['year_graduated'] = $school['year_graduated'];
+        $school['schools'][]['district'] = $school['district'];
+    }
+
+    if(isset($college)&& count($college)>0){
+        $college['userid'] = $userid;
+        $college['schools'][]['country'] = $college['country'];
+        $college['schools'][]['city'] = $college['city'];
+        $college['schools'][]['school'] = $college['school'];
+        $college['schools'][]['year_graduated'] = $college['year_graduated'];
+        $college['schools'][]['department'] = $college['department'];
+        $college['schools'][]['class'] = $college['class'];
+    }
     
     $user_array = array();
     $user_array['jsonType'] = "user";
@@ -86,16 +95,28 @@ if(count($post_data)>0){
         if(isset($post_data['fid'])){
             $cb->set('userpfbid::'.$fb_id, $userid);
         }
+        
+        if(count($school)>0){
+            $school_json = json_encode($school);
+            $cb->set('school::'.$userid,$school_json);
+        }
+        $college['userid'] = '12';
+        $college['schools'][]['country'] =  'test';
+        $college['schools'][]['city'] =  'test';
+        $college['schools'][]['school'] =  'test';
+        $college['schools'][]['year_graduated'] = 'test';
+        $college['schools'][]['department'] =  'test';
+        $college['schools'][]['class'] =  'test';
+        if(count($college)>0){
+            $college_json = json_encode($college);
+            $cb->set('college::'.$userid,$college_json);
+        }
+        
         echo $userid;
     }    
     
 }
-echo $cb->get('user::'.$userid);
-echo '<Br>mail-'.$cb->get('useremail::'.$email);
-echo '<Br>phone-'.$cb->get('userphone::'.$userid);
-echo '<Br>fb-'.$cb->get('userpfbid::'.$userid);
-echo '<Br>username-'.$cb->get('username::profile'.$userid);
-//$cb->set("user::count", 0);
+
 /*
  * user::334{
   "jsonType": "user",
