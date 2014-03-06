@@ -17,16 +17,13 @@ if(count($post_data)>0){
     $gender = $post_data['gender'];
     $email = $post_data['email'];
     $phone = $post_data['phone'];
-    $password = $post_data['password'];
+    $password = $post_data['$password'];
     $fb_id = intval($post_data['facebook_id']);
     
     $check_email = $cb->get('useremail::'.$email);
     $check_phone = $cb->get('userphone::'.$phone);
     $check_fb = $cb->get('userpfbid::'.$fb_id);
     
-    $salt = rand(1111,9999); 
-    $password = generatePassword($password,$salt);
-    $token = md5($email.rand(1111, 9999));
     
     if($check_email || $check_phone || $check_fb){
         echo "Error burtguulsen mail hayag";
@@ -41,9 +38,10 @@ if(count($post_data)>0){
     
     
 
-    
-    
-    
+    $salt = rand(1111,9999); 
+    $password = generatePassword($password,$salt);
+    $token = md5($email.rand(1111, 9999));
+
     
     
     $userid = $cb->increment("user::count");
@@ -111,7 +109,6 @@ if(count($post_data)>0){
         }
         
         echo $userid;
-        
     }    
     
 }

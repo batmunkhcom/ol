@@ -11,10 +11,17 @@ if(count($post_data)>0){
         $activate = $post_data['phone'];
     }
     
+    $code = $post_data['code'];
     
+    $check = $cb->get('activation::'.$activate);
     
+    $check_array = json_decode($check,true);
     
-    
+    if($check_array['code']==$code){
+        echo 'true';
+    }else{
+        echo 'false';
+    }
 
     
     

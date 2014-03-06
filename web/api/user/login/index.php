@@ -4,7 +4,8 @@ require '../../../../common/_.php';
 $post_data =  post();
 if(count($post_data)>0){
     $email = $post_data['email'];
-    $password = $post_data['$password'];
+    $password = $post_data['password'];
+    
     
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $userid = $cb->get('useremail::'.$email);
@@ -18,11 +19,14 @@ if(count($post_data)>0){
         $password = generatePassword($password, $user['salt']);
         if($password==$user['password']){
             echo $user['userid'];
+        }else{
+            echo '<Br>not pass';
         }
         
     }else{
         echo "Error: not valid username";
     }
 }
+
 
 ?>
