@@ -4,7 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//register
 require '../../../../global/db.php';
 require '../../../../common/_.php';
 
@@ -48,25 +48,27 @@ if(count($post_data)>0){
     
     $userid = $cb->increment("user::count");
     
-    if(isset($school)&& count($school)>0){
+    if(isset($post_data['school'])&& count($post_data['school'])>0){
         $school['userid'] = $userid;
+        $school['schoolid'] = $cb->increment('school::count');
         $school['jsonType'] = 'school';
-        $school['schools'][]['country'] = $school['country'];
-        $school['schools'][]['city'] = $school['city'];
-        $school['schools'][]['school'] = $school['school'];
-        $school['schools'][]['year_graduated'] = $school['year_graduated'];
-        $school['schools'][]['district'] = $school['district'];
+        $school['country'] = $post_data['school']['country'];
+        $school['city'] = $post_data['school']['city'];
+        $school['school'] = $post_data['school']['school'];
+        $school['year_graduated'] = $post_data['school']['year_graduated'];
+        $school['district'] = $post_data['school']['district'];
     }
 
-    if(isset($college)&& count($college)>0){
+    if(isset($post_data['college'])&& count($post_data['college'])>0){
         $college['userid'] = $userid;
+        $college['collegeid'] = $cb->increment('college::count');
         $college['jsonType'] = 'college';
-        $college['schools'][]['country'] = $college['country'];
-        $college['schools'][]['city'] = $college['city'];
-        $college['schools'][]['school'] = $college['school'];
-        $college['schools'][]['year_graduated'] = $college['year_graduated'];
-        $college['schools'][]['department'] = $college['department'];
-        $college['schools'][]['class'] = $college['class'];
+        $college['country'] = $post_data['college']['country'];
+        $college['city'] = $post_data['college']['city'];
+        $college['school'] = $post_data['college']['school'];
+        $college['year_graduated'] = $post_data['college']['year_graduated'];
+        $college['department'] = $post_data['college']['department'];
+        $college['class'] = $post_data['college']['class'];
     }
     
     $user_array = array();
@@ -89,6 +91,7 @@ if(count($post_data)>0){
     
     $result = $cb->set('user::'.$userid, $user_json);
     if($result){
+        $cb->set('userprofile::'.$userid,'{"userid":'.$userid.', "jsonType":"userprofile"}');
         if (isset($post_data['email'])){
             $cb->set('useremail::'.$email, $userid);
         }
@@ -102,12 +105,14 @@ if(count($post_data)>0){
         
         if(count($school)>0){
             $school_json = json_encode($school);
-            $cb->set('school::'.$userid,$school_json);
+            $school_id = $cb->increment('school::count');
+            $cb->set('school::'.$school_id,$school_json);
         }
         
         if(count($college)>0){
             $college_json = json_encode($college);
-            $cb->set('college::'.$userid,$college_json);
+            $college_id = $cb->increment('college::count');
+            $cb->set('college::'.$college_id,$college_json);
         }
         
         echo $userid;

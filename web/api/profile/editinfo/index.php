@@ -27,32 +27,29 @@ if(count($post_data)>0){
     $language = $post_data['language'];
     $userid = $post_data['userid'];
     
-        
-    $result = $cb->set('user::'.$userid, $user_json);
-    if($result){
-        if (isset($post_data['email'])){
-            $cb->set('useremail::'.$email, $userid);
-        }
-        if (isset($post_data['phone'])) {
-            $cb->set('userphone::'.$phone, $userid);
-        }
-        $cb->set('username::profile'.$userid, $userid); //$cb->get('username::bayarsaikhan'); result:userid
-        if(isset($post_data['fid'])){
-            $cb->set('userpfbid::'.$fb_id, $userid);
-        }
-        
-        if(count($school)>0){
-            $school_json = json_encode($school);
-            $cb->set('school::'.$userid,$school_json);
-        }
-        
-        if(count($college)>0){
-            $college_json = json_encode($college);
-            $cb->set('college::'.$userid,$college_json);
-        }
-        
-        echo $userid;
-    }    
+    $profile_json = $cb->get('userprofile::'.$userid);    
+    if($profile_json){
+        $profile = json_decode($profile_json,true);
+
+        $profile['family_name'] = $family_name;
+        $profile['last_name'] = $last_name; 
+        $profile['first_name'] = $first_name; 
+        $profile['gender'] = $gender;
+        $profile['relationship_status'] = $relationship_status; 
+        $profile['relationship_status_visibility'] = $relationship_status_visibility;
+        $profile['bday_year'] = $bday_year;
+        $profile['bday_month'] = $bday_month;
+        $profile['bday_day'] = $bday_day;
+        $profile['bday_visibility'] = $bday_visibility;
+        $profile['born'] = $born;
+        $profile['language'] = $language;
+
+        $tojson = json_encode($profile);
+
+
+        $cb->set('userprofile::'.$userid, $tojson);
+    }
+//    echo $cb->get('userprofile::'.$userid);
     
 }
 
