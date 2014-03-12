@@ -60,26 +60,16 @@ function post($key='') {
     }
 }
 
-/**
- * M\Config::get('FILES') iin utguudaas avna
- *
- * @param string $key $_FILES[$key] geh met avah tulhuur ug
- * @param string $subkey $_FILES[$key][$subkey] geh met avah sub tulhuur ug
- *
- * @return type Description
- */
-function files($key, $subkey) {
-
-    $files = \M\Config::get('FILES');
-    if (isset($files[$key][$subkey])) {
-        return $files[$key][$subkey];
+function files($key){
+    if ($key=='') {
+        return $_FILES;
     } else {
-        if (isset($files[$key])) {
-            return $files[$key];
-        }
-        return false;
+
+        return $_FILES[$key];
     }
 }
+
+
 
 function post_exists($key) {
     if (isset($_POST[$key])) {
