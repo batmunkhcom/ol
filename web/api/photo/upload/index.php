@@ -6,7 +6,37 @@ $post_data = post();
 $files_data = files($key);
 
 if(count($files_data)>0){
-    var_dump($files_data);
+    $handle = new upload($files_data['image']);
+    if ($handle->uploaded) {
+        echo 'uplaoded';
+//      $handle->file_new_name_body   = $file_name;
+      $handle->image_resize         = true;
+      $handle->image_x              = 250;
+      $handle->image_y              = 250;
+      $handle->image_ratio_crop     = true;
+      
+      $handle->process('../../../uploads');
+        
+      $medium = $handle->processed;
+      
+      
+      
+//      echo $file_name;
+      
+
+      if ($medium) {
+
+          $new_name = $handle->file_dst_name;
+      		
+          $handle->clean();
+          echo $new_name;
+      }else{
+          echo $handle->error;
+      }
+  }else{
+      echo 'error';
+      echo $handle->error;
+  }
 }
 
 
