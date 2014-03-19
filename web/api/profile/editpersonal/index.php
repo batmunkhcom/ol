@@ -33,7 +33,7 @@ if(count($post_data)>0){
         $cb->set('userprofile::'.$userid, json_encode($arr));
     }
     
-    echo $cb->get('userprofile::'.$userid);die();
+    
     
 }
 

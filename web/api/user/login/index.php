@@ -18,7 +18,9 @@ if(count($post_data)>0){
         $user = json_decode($userjson,true);
         $password = generatePassword($password, $user['salt']);
         if($password==$user['password']){
-            echo $user['userid'];
+            $return['userid'] = $user['userid'];
+            $return['username'] = $user['username'];
+            echo json_encode($return);
         }else{
             echo '<Br>not pass';
         }
@@ -26,6 +28,8 @@ if(count($post_data)>0){
     }else{
         echo "Error: not valid username";
     }
+    
+    
 }
 
 

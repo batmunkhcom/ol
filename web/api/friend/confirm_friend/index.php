@@ -16,7 +16,6 @@ if(count($post_data)>0){
             echo "Aldaa nzuud esvel nziin huselt yawuulsan";
         }else{
             if(isset($from_array['request'][$to])){
-                
                 $from_array['friendids'][$to]['userid'] = $to;
                 $from_array['friendids'][$to]['created_at'] = $ognoo;
                 

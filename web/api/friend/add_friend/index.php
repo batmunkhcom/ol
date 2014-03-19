@@ -12,11 +12,11 @@ if(count($post_data)>0){
     /* @var $from //huselt huleej bgaa id */
     $to = $post_data['toid'];
     
-
+    
     $from_json = $cb->get('userfriend::'.$from);
     if($from_json){
         $from_array = json_decode($from_json,true);
-        if(in_array($to, $from_array['myrequest']) || in_array($to, $from_array['friendids']) ){
+        if(isset($from_array['myrequest'][$to]) || isset($from_array['friendids'][$to]) ){
             echo "Error requist yawuulsan or nzuud";
         }else{
             $from_array['myrequest'][$to]['userid'] = $to;
@@ -34,8 +34,8 @@ if(count($post_data)>0){
         $friend['followers'] = array();
         $friend['ifollow'] = array();
         
-        $from_array['myrequest'][$to]['userid'] = $to;
-        $from_array['myrequest'][$to]['created_at'] = $ognoo;
+        $friend['myrequest'][$to]['userid'] = $to;
+        $friend['myrequest'][$to]['created_at'] = $ognoo;
         
         $cb->set('userfriend::'.$from, json_encode($friend));
         
@@ -44,12 +44,12 @@ if(count($post_data)>0){
     $to_json = $cb->get('userfriend::'.$to);
     if($to_json){
         $to_array = json_decode($to_json,true);
-        if(in_array($from, $to_array['request']) || in_array($from, $to_array['friendids']) ){
+        if(isset($to_array['request'][$from]) || isset( $to_array['friendids'][$from]) ){
             echo "Error requist yawuulsan or nzuud";
         }else{
-            $to_array['request'][$to]['userid'] = $from;
-            $to_array['request'][$to]['created_at'] = $ognoo;
-            $cb->set('userfriend::'.$to, json_encode($friend_to));
+            $to_array['request'][$from]['userid'] = $from;
+            $to_array['request'][$from]['created_at'] = $ognoo;
+            $cb->set('userfriend::'.$to, json_encode($to_array));
         }
         
     }else{
@@ -62,11 +62,14 @@ if(count($post_data)>0){
         $friend_to['followers'] = array();
         $friend_to['ifollow'] = array();
         
-        $to_array['request'][$to]['userid'] = $from;
-        $to_array['request'][$to]['created_at'] = $ognoo;
+        $friend_to['request'][$from]['userid'] = $from;
+        $friend_to['request'][$from]['created_at'] = $ognoo;
         $cb->set('userfriend::'.$to, json_encode($friend_to));
         
     }
+    
+    
+    
     
 }
 ?>
