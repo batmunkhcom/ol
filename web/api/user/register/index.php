@@ -36,7 +36,6 @@ if(count($post_data)>0){
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "not valid email";
         return false;
-        exit();
     }
     
     
@@ -91,6 +90,38 @@ if(count($post_data)>0){
     
     $result = $cb->set('user::'.$userid, $user_json);
     if($result){
+        $settings = '{
+                      "jsonType": "usersettings",
+                      "userid":'.$userid.',
+                      "left_friend": "0",
+                      "left_photo": "0",
+                      "left_video": "0",
+                      "left_music": "0",
+                      "left_message": "0",
+                      "left_group": "0",
+                      "left_bookmark": "0",
+                      "left_apps": "0",
+                      "wall_only_my_post": "1",
+                      "post_disable_comment": "1",
+                      "profile_view": "1",
+                      "photo_view": "1",
+                      "video_view": "1",
+                      "group_view": "1",
+                      "music_view": "1",
+                      "gift_view": "1",
+                      "map_view": "1",
+                      "friend_view": "1",
+                      "profile_write": "1",
+                      "comment_view": "1",
+                      "comment_write": "1",
+                      "mail_send": "1",
+                      "invite_group": "1",
+                      "invite_app": "1",
+                      "add_friend": "1",
+                      "internet_view": "1"
+
+                    }';
+        $cb->set('usersettings::'.$userid, $settings);
         $cb->set('userprofile::'.$userid,'{"userid":'.$userid.', "jsonType":"userprofile"}');
         if (isset($post_data['email'])){
             $cb->set('useremail::'.$email, $userid);

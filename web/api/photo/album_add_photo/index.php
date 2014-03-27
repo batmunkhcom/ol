@@ -57,7 +57,7 @@ if(count($files_data)>0 && count($post_data)>0){
       $handle->image_resize         = true;
       $handle->image_x              = 132;
       $handle->image_convert = 'jpg';
-      $handle->image_ratio_crop     = true;
+      $handle->image_ratio     = true;
       $handle->process($upload_dir.DIRECTORY_SEPARATOR.$date.DIRECTORY_SEPARATOR.'s3'.DIRECTORY_SEPARATOR);
         
       $s3 = $handle->processed;
@@ -74,7 +74,7 @@ if(count($files_data)>0 && count($post_data)>0){
       $handle->image_resize         = true;
       $handle->image_x              = 270;
       $handle->image_convert = 'jpg';
-      $handle->image_ratio_crop     = true;
+      $handle->image_ratio     = true;
       $handle->process($upload_dir.DIRECTORY_SEPARATOR.$date.DIRECTORY_SEPARATOR.'s4'.DIRECTORY_SEPARATOR);
         
       $s4 = $handle->processed;
@@ -130,14 +130,14 @@ if(count($files_data)>0 && count($post_data)>0){
           $image['types']['s5'] = $s5_array;
           
           $cb->set('photos::'.$new_id, json_encode($image));
-          
+          echo $cb->get('photos::'.$new_id);
           $album = $cb->get('album::'.$albumid);
           
           $album_array = json_decode($album,true);
           
           
           if(!isset($album_array['thumbid'])){
-             $album_array['thumbid'] = $new_id; 
+             $album_array['thumbid'] = $new_id;
           }
           
           $cb->set('album::'.$albumid,  json_encode($album_array));

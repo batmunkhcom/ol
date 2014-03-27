@@ -37,7 +37,7 @@ if(count($post_data)>0){
         $cb->set('userfriend::'.$to, json_encode($to_array));
     }
 //    
-    echo $cb->get('userfriend::'.$from);
+//    echo $cb->get('userfriend::'.$from);
    
     
 }
